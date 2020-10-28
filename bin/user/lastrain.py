@@ -57,7 +57,8 @@ class lastRainTags(SearchList):
 
         # Get ts for day of last rain from statsdb
         # Value returned is ts for midnight on the day the rain occurred
-        _row = db_lookup().getSql("SELECT MAX(dateTime) FROM archive_day_rain WHERE sum > 0")
+# cumul de pluie > 1 mm
+        _row = db_lookup().getSql("SELECT MAX(dateTime) FROM archive_day_rain WHERE sum > 0.1")
 
         last_rain_ts = _row[0]
         # Now if we found a ts then use it to limit our search on the archive 
